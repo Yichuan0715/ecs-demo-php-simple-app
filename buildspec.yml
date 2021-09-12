@@ -2,7 +2,7 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - aws ecr get-login
+      - aws ecr get-login-password | docker login --username AWS --password-stdin 843833360965.dkr.ecr.us-west-2.amazonaws.com/
     #  - $(aws ecr get-login)
     #  - TAG="$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)"
     #  - echo "prebuild success"
