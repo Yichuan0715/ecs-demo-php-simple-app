@@ -1,0 +1,17 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - $(aws ecr get-login)
+      - TAG="$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)"
+      - echo $TAG
+  build:
+    commands:
+      - docker build --tag "843833360965.dkr.ecr.us-west-2.amazonaws.com/git-ecr-ecs:${TAG}" .
+  post_build:
+    commands:
+      - docker push "843833360965.dkr.ecr.us-west-2.amazonaws.com/git-ecr-ecs:${TAG}"
+      - printf '{"tag":"%s"}' $TAG > build.json
+artifacts:
+  files: build.json
+  
