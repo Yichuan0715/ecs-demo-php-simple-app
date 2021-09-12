@@ -2,7 +2,8 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - $(aws ecr get-login)
+      - aws ecr get-login
+    #  - $(aws ecr get-login)
     #  - TAG="$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)"
     #  - echo "prebuild success"
       - echo $CODEBUILD_RESOLVED_SOURCE_VERSION
